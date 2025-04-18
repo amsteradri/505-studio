@@ -10,6 +10,8 @@ export default function Home() {
       <Head>
         <title>505 Studio - Agencia Creativa</title>
         <meta name="description" content="Branding, diseño web, SEO y más." />
+        
+        
       </Head>
       <main className="font-sans">
         <Hero />

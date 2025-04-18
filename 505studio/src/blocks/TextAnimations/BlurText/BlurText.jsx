@@ -1,7 +1,3 @@
-/*
-	Installed from https://reactbits.dev/tailwind/
-*/
-
 import { useRef, useEffect, useState } from 'react';
 import { useSprings, animated } from '@react-spring/web';
 
@@ -13,8 +9,6 @@ const BlurText = ({
   direction = 'top', // 'top' or 'bottom'
   threshold = 0.1,
   rootMargin = '0px',
-  animationFrom,
-  animationTo,
   easing = 'easeOutCubic',
   onAnimationComplete,
 }) => {
@@ -23,7 +17,6 @@ const BlurText = ({
   const ref = useRef();
   const animatedCount = useRef(0);
 
-  // Default animations based on direction
   const defaultFrom =
     direction === 'top'
       ? { filter: 'blur(10px)', opacity: 0, transform: 'translate3d(0,-50px,0)' }
@@ -57,10 +50,10 @@ const BlurText = ({
   const springs = useSprings(
     elements.length,
     elements.map((_, i) => ({
-      from: animationFrom || defaultFrom,
+      from: defaultFrom,
       to: inView
         ? async (next) => {
-          for (const step of (animationTo || defaultTo)) {
+          for (const step of (defaultTo)) {
             await next(step);
           }
           animatedCount.current += 1;
@@ -68,19 +61,22 @@ const BlurText = ({
             onAnimationComplete();
           }
         }
-        : animationFrom || defaultFrom,
+        : defaultFrom,
       delay: i * delay,
       config: { easing },
     }))
   );
 
   return (
-    <p ref={ref} className={`blur-text ${className} flex flex-wrap`}>
+    <p ref={ref} className={`blur-text ${className}`}>
       {springs.map((props, index) => (
         <animated.span
           key={index}
-          style={props}
-          className="inline-block will-change-[transform,filter,opacity]"
+          style={{
+            ...props,
+            display: 'inline-block',
+            willChange: 'transform, filter, opacity',
+          }}
         >
           {elements[index] === ' ' ? '\u00A0' : elements[index]}
           {animateBy === 'words' && index < elements.length - 1 && '\u00A0'}
