@@ -1,63 +1,66 @@
 'use client'
 
-import { motion } from 'framer-motion'
-import { Paintbrush, MonitorSmartphone, SearchCheck } from 'lucide-react'
+import { FaPaintBrush, FaLaptopCode, FaSearch } from 'react-icons/fa'
 
-const services = [
+const servicios = [
   {
+    icon: <FaPaintBrush className="text-4xl text-blue-500 mb-4" />,
     title: 'Branding & Logo',
-    description: 'Creamos identidades visuales únicas que reflejan tu esencia de marca y generan reconocimiento.',
-    icon: <Paintbrush className="w-10 h-10 text-blue-500" />,
+    desc: 'Creamos identidades visuales memorables que conectan emocionalmente con tu audiencia.',
   },
   {
+    icon: <FaLaptopCode className="text-4xl text-cyan-500 mb-4" />,
     title: 'Diseño Web',
-    description: 'Desarrollamos sitios web modernos, rápidos y responsivos centrados en conversión y experiencia de usuario.',
-    icon: <MonitorSmartphone className="w-10 h-10 text-emerald-500" />,
+    desc: 'Landing pages modernas, ultra responsivas y diseñadas para convertir visitantes en clientes.',
   },
   {
+    icon: <FaSearch className="text-4xl text-emerald-500 mb-4" />,
     title: 'SEO & Optimización',
-    description: 'Mejoramos tu posicionamiento en buscadores con estrategias SEO eficaces y contenido optimizado.',
-    icon: <SearchCheck className="w-10 h-10 text-cyan-500" />,
+    desc: 'Mejoramos tu visibilidad orgánica en Google con estrategias SEO que realmente funcionan.',
+  },
+  {
+    icon: <FaPaintBrush className="text-4xl text-purple-500 mb-4" />,
+    title: 'Diseño Gráfico',
+    desc: 'Diseñamos materiales visuales impactantes que refuerzan la identidad de tu marca.',
+  },
+  {
+    icon: <FaLaptopCode className="text-4xl text-orange-500 mb-4" />,
+    title: 'Desarrollo de Apps',
+    desc: 'Creamos aplicaciones móviles intuitivas y funcionales para iOS y Android.',
+  },
+  {
+    icon: <FaSearch className="text-4xl text-red-500 mb-4" />,
+    title: 'Marketing Digital',
+    desc: 'Estrategias de marketing digital personalizadas para maximizar tu alcance y conversión.',
   },
 ]
 
-const Servicios = () => {
-  return (
-    <section id="servicios" className="py-24 px-6 bg-gradient-to-br from-white via-slate-50 to-slate-100">
-      <div className="max-w-6xl mx-auto text-center">
-        <motion.h2
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-          className="text-4xl font-extrabold text-gray-800 mb-14"
-        >
-          Nuestros Servicios
-        </motion.h2>
-
-        <div className="grid md:grid-cols-3 gap-10">
-          {services.map((service, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: index * 0.2 }}
-              viewport={{ once: true }}
-              className="group relative p-8 rounded-2xl border border-white/10 bg-white/60 backdrop-blur-sm shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-1"
-            >
-              <div className="mb-6">
-                <div className="w-16 h-16 flex items-center justify-center bg-white rounded-full shadow group-hover:scale-110 transition">
-                  {service.icon}
-                </div>
-              </div>
-              <h3 className="text-xl font-bold text-gray-800 mb-3 group-hover:text-blue-600 transition">{service.title}</h3>
-              <p className="text-gray-600 leading-relaxed">{service.description}</p>
-            </motion.div>
-          ))}
-        </div>
+const Servicios = () => (
+  <section
+    id="servicios"
+    className="py-24 px-6 bg-white text-gray-900"
+  >
+    <div className="max-w-6xl mx-auto text-center">
+      <h2 className="text-5xl font-extrabold mb-6 tracking-tight">
+        Nuestros <span className="text-blue-600">Servicios</span>
+      </h2>
+      <p className="text-gray-600 text-lg mb-16 max-w-2xl mx-auto">
+        Soluciones creativas, estratégicas y a medida para posicionar tu marca con fuerza en el mercado.
+      </p>
+      <div className="grid md:grid-cols-3 gap-12">
+        {servicios.map(({ icon, title, desc }, i) => (
+          <div
+            key={i}
+            className="p-8 bg-white rounded-2xl shadow-xl border border-gray-100 hover:shadow-2xl transition-all duration-300 text-left hover:-translate-y-1"
+          >
+            {icon}
+            <h3 className="text-2xl font-semibold mb-3 text-gray-800">{title}</h3>
+            <p className="text-gray-600 leading-relaxed">{desc}</p>
+          </div>
+        ))}
       </div>
-    </section>
-  )
-}
+    </div>
+  </section>
+)
 
 export default Servicios
