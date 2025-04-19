@@ -1,6 +1,7 @@
 'use client'
 
 import { FaPaintBrush, FaLaptopCode, FaSearch } from 'react-icons/fa'
+import GradientText from "@/blocks/TextAnimations/GradientText/GradientText"
 
 const servicios = [
   {
@@ -41,9 +42,10 @@ const Servicios = () => (
     className="py-24 px-6 bg-white text-gray-900"
   >
     <div className="max-w-6xl mx-auto text-center">
-      <h2 className="text-5xl font-extrabold mb-6 tracking-tight">
-        Nuestros <span className="text-blue-600">Servicios</span>
-      </h2>
+    <h2 className="text-5xl font-extrabold mb-6 tracking-tight">
+      Nuestros <GradientText colors={["#c0c0c0", "#a9a9a9", "#e0e0e0", "#b0b0b0", "#d3d3d3"]}>Servicios</GradientText>
+    </h2>
+
       <p className="text-gray-600 text-lg mb-16 max-w-2xl mx-auto">
         Soluciones creativas, estratégicas y a medida para posicionar tu marca con fuerza en el mercado.
       </p>
