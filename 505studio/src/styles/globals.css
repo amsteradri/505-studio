@@ -57,6 +57,13 @@ body {
   font-display: swap; /* Opcional, para mejorar la carga de la fuente */
 }
 
+@font-face {
+  font-family: "Roboto VF";
+  src: url("/fonts/Roboto/Roboto-VariableFont_wdth,wght.ttf") format("truetype");
+  font-style: normal;
+  font-weight: normal;
+}
+
 
 html {
   scroll-behavior: smooth;

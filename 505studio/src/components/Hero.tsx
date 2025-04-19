@@ -1,8 +1,12 @@
 'use client'
 
 import { motion } from 'framer-motion'
+
 import BlurText from "@/blocks/TextAnimations/BlurText/BlurText"
 import ShinyText from "@/blocks/TextAnimations/ShinyText/ShinyText"
+import TextPressure from "@/blocks/TextAnimations/TextPressure/TextPressure"
+import GradientText from "@/blocks/TextAnimations/GradientText/GradientText"
+
 
 
 const handleAnimationComplete = () => {
@@ -26,9 +30,9 @@ const Hero = () => {
       {/* Background con imagen + overlay */}
       <div className="absolute inset-0 z-0">
         <img
-          src="/bg-hero2.jpg"
+          src="/bg-hero3.jpg"
           alt="Background"
-          className="w-full h-full object-cover opacity-80"
+          className="w-full h-full object-cover opacity-100"
         />
         <div className="absolute inset-0 bg-gradient-to-br from-black/80 via-black/60 to-black/90"></div>
       </div>
@@ -42,10 +46,10 @@ const Hero = () => {
       >
         <h1
           className="text-[3.5rem] md:text-[4.5rem] font-extrabold leading-tight tracking-tight mb-6"
-          style={{ fontFamily: "'Poppins', sans-serif", letterSpacing: '0.05em' }}
+          style={{ fontFamily: "'Roboto VF', sans-serif", letterSpacing: '0.02em' }}
         >
           <BlurText
-            text="Impulsamos tu Marca al Siguiente Nivel"
+            text="Impulsamos tu Marca al siguiente"
             delay={150}
             animateBy="words"
             direction="top"
@@ -53,6 +57,22 @@ const Hero = () => {
             className="text-[2.5rem] md:text-[3.5rem] mb-8"
           />
         </h1>
+
+        <div style={{ position: 'relative', height: '200px', width: '100%', maxWidth: '400px', margin: '0 auto', overflow: 'hidden' }}>
+          <TextPressure
+            text="Nivel"
+            flex={true}
+            alpha={false}
+            stroke={false}
+            width={true}
+            weight={true}
+            italic={true}
+            textColor="#98edf3"
+            strokeColor="#ff0000"
+            minFontSize={30}
+            className="text-3xl"
+          />
+        </div>
 
 
         <ShinyText
