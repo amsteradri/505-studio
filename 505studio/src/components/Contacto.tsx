@@ -2,6 +2,16 @@
 
 import { motion } from 'framer-motion'
 
+import { GetStaticPropsContext } from 'next';
+
+export async function getStaticProps({ locale }: GetStaticPropsContext) {
+  return {
+    props: {
+      messages: (await import(`../../locales/${locale}/common.json`)).default
+    }
+  };
+}
+
 const Contacto = () => {
   return (
     <section id="contacto" className="relative py-20 px-6 bg-white text-gray-900 overflow-hidden">

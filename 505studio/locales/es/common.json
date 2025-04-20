@@ -1,0 +1,9 @@
+{
+    "navbar": {
+        "inicio": "Inicio",
+        "servicios": "Servicios",
+        "portafolio": "Portafolio",
+        "who": "Quiénes somos",
+        "contacto": "Contacto"
+    }
+}

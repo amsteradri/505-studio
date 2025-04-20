@@ -3,6 +3,16 @@
 import { FaPaintBrush, FaLaptopCode, FaSearch } from 'react-icons/fa'
 import GradientText from "@/blocks/TextAnimations/GradientText/GradientText"
 
+import { GetStaticPropsContext } from 'next';
+
+export async function getStaticProps({ locale }: GetStaticPropsContext) {
+  return {
+    props: {
+      messages: (await import(`../../locales/${locale}/common.json`)).default
+    }
+  };
+}
+
 const servicios = [
   {
     icon: <FaPaintBrush className="text-4xl text-blue-500 mb-4" />,

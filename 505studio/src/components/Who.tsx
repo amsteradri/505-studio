@@ -3,6 +3,16 @@
 import { motion } from 'framer-motion'
 import { FaLinkedin, FaGithub, FaBehance } from 'react-icons/fa'
 
+import { GetStaticPropsContext } from 'next';
+
+export async function getStaticProps({ locale }: GetStaticPropsContext) {
+  return {
+    props: {
+      messages: (await import(`../../locales/${locale}/common.json`)).default
+    }
+  };
+}
+
 const team = [
   {
     name: 'Eira Garcia Utrera',

@@ -7,7 +7,15 @@ import ShinyText from "@/blocks/TextAnimations/ShinyText/ShinyText"
 import TextPressure from "@/blocks/TextAnimations/TextPressure/TextPressure"
 import GradientText from "@/blocks/TextAnimations/GradientText/GradientText"
 
+import { GetStaticPropsContext } from 'next';
 
+export async function getStaticProps({ locale }: GetStaticPropsContext) {
+  return {
+    props: {
+      messages: (await import(`../../locales/${locale}/common.json`)).default
+    }
+  };
+}
 
 const handleAnimationComplete = () => {
   console.log('Animation completed!')
