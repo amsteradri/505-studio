@@ -1,10 +1,7 @@
 module.exports = {
     locales: ['es', 'en'],
+    input: ['src/components/**/*.{js,jsx,ts,tsx}', 'src/pages/**/*.{js,jsx,ts,tsx}'],
     output: 'locales/$LOCALE/common.json',
-    input: [
-      'components/**/*.{js,ts,jsx,tsx}',
-      'pages/**/*.{js,ts,jsx,tsx}'
-    ],
     defaultValue: '',
     useKeysAsDefaultValue: false,
     createOldCatalogs: false,

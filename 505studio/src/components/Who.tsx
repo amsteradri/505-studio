@@ -1,7 +1,8 @@
-'use client'
+'use client';
 
-import { motion } from 'framer-motion'
-import { FaLinkedin, FaGithub, FaBehance } from 'react-icons/fa'
+import { motion } from 'framer-motion';
+import { FaLinkedin, FaGithub, FaBehance } from 'react-icons/fa';
+import { useTranslations } from 'next-intl';
 
 import { GetStaticPropsContext } from 'next';
 
@@ -13,26 +14,28 @@ export async function getStaticProps({ locale }: GetStaticPropsContext) {
   };
 }
 
-const team = [
-  {
-    name: 'Eira Garcia Utrera',
-    role: 'Directora Creativa & Diseñadora Visual',
-    bio: 'Especialista en identidad visual, UI design y branding emocional. Transformo conceptos en experiencias visuales con impacto.',
-    image: '/eira.jpeg',
-    linkedin: 'https://www.linkedin.com/in/eira-garcia-utrera-91a226215/',
-    behance: 'https://www.behance.net/eirautrera'
-  },
-  {
-    name: 'Adrián Gutiérrez Segovia',
-    role: 'Desarrollador Full Stack',
-    bio: 'Apasionado de la programación y el desarrollo de interfaces modernas que convierten.',
-    image: '/adri.jpeg',
-    linkedin: 'https://www.linkedin.com/in/adri%C3%A1n-gutierrez-segovia-1275a8165/',
-    github: 'https://github.com/amsteradri'
-  }
-]
-
 const Who = () => {
+  const t = useTranslations('who');
+
+  const team = [
+    {
+      name: 'Eira Garcia Utrera',
+      role: t('team.0.role'),
+      bio: t('team.0.bio'),
+      image: '/eira.jpeg',
+      linkedin: 'https://www.linkedin.com/in/eira-garcia-utrera-91a226215/',
+      behance: 'https://www.behance.net/eirautrera'
+    },
+    {
+      name: 'Adrián Gutiérrez Segovia',
+      role: t('team.1.role'),
+      bio: t('team.1.bio'),
+      image: '/adri.jpeg',
+      linkedin: 'https://www.linkedin.com/in/adri%C3%A1n-gutierrez-segovia-1275a8165/',
+      github: 'https://github.com/amsteradri'
+    }
+  ];
+
   return (
     <section
       id="who"
@@ -45,7 +48,7 @@ const Who = () => {
           transition={{ duration: 0.8 }}
           className="text-5xl md:text-6xl font-extrabold tracking-tight mb-16"
         >
-          ¿Quiénes somos?
+          {t('title')}
         </motion.h2>
 
         <div className="grid md:grid-cols-2 gap-12">
@@ -88,7 +91,7 @@ const Who = () => {
         </div>
       </div>
     </section>
-  )
-}
+  );
+};
 
-export default Who
+export default Who;

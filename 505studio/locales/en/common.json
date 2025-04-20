@@ -1,10 +1,91 @@
 {
-    "navbar": {
-      "inicio": "Home",
-      "servicios": "Services",
-      "portafolio": "Portfolio",
-      "who": "Who we are",
-      "contacto": "Contact"
+  "navbar": {
+    "inicio": "Home",
+    "servicios": "Services",
+    "portafolio": "Portfolio",
+    "who": "Who we are",
+    "contacto": "Contact"
+  },
+  
+    "hero": {
+      "title": "We boost your Brand to the next",
+      "level": "Level",
+      "description": "Strategic branding, unique visual design, impactful web development, and SEO positioning.",
+      "cta": "See Services"
+    },
+    "services": {
+    "titleStart": "Our",
+    "titleAccent": "Services",
+    "description": "Creative, strategic, and custom solutions to powerfully position your brand in the market.",
+    
+    "branding": {
+      "title": "Branding & Logo",
+      "desc": "We create memorable visual identities that emotionally connect with your audience."
+    },
+    "web": {
+      "title": "Web Design",
+      "desc": "Modern, ultra-responsive landing pages designed to convert visitors into customers."
+    },
+    "seo": {
+      "title": "SEO & Optimization",
+      "desc": "We improve your organic visibility on Google with SEO strategies that really work."
+    },
+    "graphic": {
+      "title": "Graphic Design",
+      "desc": "We design impactful visual materials that reinforce your brand identity."
+    },
+    "apps": {
+      "title": "App Development",
+      "desc": "We create intuitive and functional mobile apps for iOS and Android."
+    },
+    "marketing": {
+      "title": "Digital Marketing",
+      "desc": "Customized digital marketing strategies to maximize your reach and conversions."
     }
+  },
+  "portfolio": {
+    "titleStart": "Our",
+    "titleAccent": "Portfolio",
+    "description": "Some of the projects we've developed for brands that trusted us.",
+    "projects": [
+      {
+        "title": "Online Store",
+        "desc": "Design and development of an ecommerce platform for urban fashion."
+      },
+      {
+        "title": "Corporate Branding",
+        "desc": "Complete visual identity for a strategic consulting firm."
+      },
+      {
+        "title": "Full Branding",
+        "desc": "Modern campaign page, clean and focused on conversions."
+      }
+    ]
+  },
+  "who": {
+    "title": "Who are we?",
+    "team": [
+      {
+        "role": "Creative Director & Visual Designer",
+        "bio": "Specialist in visual identity, UI design, and emotional branding. I transform concepts into impactful visual experiences."
+      },
+      {
+        "role": "Full Stack Developer",
+        "bio": "Passionate about programming and developing modern interfaces that convert."
+      }
+    ]
+  },
+  "contacto": {
+    "title": "Get in touch",
+    "name": "Name",
+    "namePlaceholder": "Your full name",
+    "email": "Email",
+    "emailPlaceholder": "youremail@example.com",
+    "message": "Message",
+    "messagePlaceholder": "Tell us more about your project or questions...",
+    "submitButton": "Send Message"
   }
   
+  
+  
+}

@@ -1,9 +1,90 @@
 {
-    "navbar": {
-        "inicio": "Inicio",
-        "servicios": "Servicios",
-        "portafolio": "Portafolio",
-        "who": "Quiénes somos",
-        "contacto": "Contacto"
+  "navbar": {
+    "inicio": "Inicio",
+    "servicios": "Servicios",
+    "portafolio": "Portafolio",
+    "who": "Quiénes somos",
+    "contacto": "Contacto"
+  },
+  
+    "hero": {
+      "title": "Impulsamos tu Marca al siguiente",
+      "level": "Nivel",
+      "description": "Branding estratégico, diseño visual único, desarrollo web con impacto y posicionamiento SEO.",
+      "cta": "Ver Servicios"
+    },
+    "services": {
+    "titleStart": "Nuestros",
+    "titleAccent": "Servicios",
+    "description": "Soluciones creativas, estratégicas y a medida para posicionar tu marca con fuerza en el mercado.",
+    
+    "branding": {
+      "title": "Branding & Logo",
+      "desc": "Creamos identidades visuales memorables que conectan emocionalmente con tu audiencia."
+    },
+    "web": {
+      "title": "Diseño Web",
+      "desc": "Landing pages modernas, ultra responsivas y diseñadas para convertir visitantes en clientes."
+    },
+    "seo": {
+      "title": "SEO & Optimización",
+      "desc": "Mejoramos tu visibilidad orgánica en Google con estrategias SEO que realmente funcionan."
+    },
+    "graphic": {
+      "title": "Diseño Gráfico",
+      "desc": "Diseñamos materiales visuales impactantes que refuerzan la identidad de tu marca."
+    },
+    "apps": {
+      "title": "Desarrollo de Apps",
+      "desc": "Creamos aplicaciones móviles intuitivas y funcionales para iOS y Android."
+    },
+    "marketing": {
+      "title": "Marketing Digital",
+      "desc": "Estrategias de marketing digital personalizadas para maximizar tu alcance y conversión."
     }
+  },
+  "portfolio": {
+    "titleStart": "Nuestro",
+    "titleAccent": "Portafolio",
+    "description": "Algunos proyectos que hemos desarrollado para marcas que confiaron en nosotros.",
+    "projects": [
+      {
+        "title": "Tienda Online",
+        "desc": "Diseño y desarrollo de ecommerce para moda urbana."
+      },
+      {
+        "title": "Branding Corporativo",
+        "desc": "Identidad visual completa para consultora estratégica."
+      },
+      {
+        "title": "Branding Completo",
+        "desc": "Página de campaña moderna, clara y enfocada a conversiones."
+      }
+    ]
+  },
+  "who": {
+    "title": "¿Quiénes somos?",
+    "team": [
+      {
+        "role": "Directora Creativa & Diseñadora Visual",
+        "bio": "Especialista en identidad visual, UI design y branding emocional. Transformo conceptos en experiencias visuales con impacto."
+      },
+      {
+        "role": "Desarrollador Full Stack",
+        "bio": "Apasionado de la programación y el desarrollo de interfaces modernas que convierten."
+      }
+    ]
+  },
+  "contacto": {
+    "title": "Ponte en contacto",
+    "name": "Nombre",
+    "namePlaceholder": "Tu nombre completo",
+    "email": "Correo electrónico",
+    "emailPlaceholder": "tucorreo@ejemplo.com",
+    "message": "Mensaje",
+    "messagePlaceholder": "Cuéntanos más sobre tu proyecto o tus dudas...",
+    "submitButton": "Enviar mensaje"
+  }
+  
+  
 }
