@@ -26,7 +26,7 @@ const scrollToServicios = () => {
 
 const Hero = () => {
   return (
-    <section className="relative min-h-screen flex items-center justify-center text-white text-center overflow-hidden">
+    <section id="hero" className="relative min-h-screen flex items-center justify-center text-white text-center overflow-hidden">
       {/* Background con imagen + overlay */}
       <div className="absolute inset-0 z-0">
         <img
@@ -78,7 +78,7 @@ const Hero = () => {
         <ShinyText
           text="Branding estratégico, diseño visual único, desarrollo web con impacto y posicionamiento SEO."
           speed={2.5}
-          className="text-xl mb-10 leading-tight tracking-tight text-center max-w-3xl mx-auto"
+          className="text-2xl mb-10 leading-tight tracking-tight text-center max-w-3xl mx-auto"
         />
 
         {/* Botón con borde pro y scroll suave */}

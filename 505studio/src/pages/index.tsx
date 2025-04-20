@@ -3,6 +3,8 @@ import Hero from '@/components/Hero'
 import Servicios from '@/components/Servicios'
 import Portafolio from '@/components/Portafolio'
 import Contacto from '@/components/Contacto'
+import NavBar from '@/components/NavBar'
+import Who from '@/components/Who'
 
 export default function Home() {
   return (
@@ -14,9 +16,11 @@ export default function Home() {
         
       </Head>
       <main className="font-sans">
+        <NavBar />
         <Hero />
         <Servicios />
         <Portafolio />
+        <Who/>
         <Contacto />
       </main>
     </>

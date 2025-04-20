@@ -2,8 +2,24 @@
 
 import Slider from 'react-slick'
 import Image from 'next/image'
+import GradientText from "@/blocks/TextAnimations/GradientText/GradientText"
 
 const proyectos = [
+  {
+    title: 'Tienda Online',
+    desc: 'Diseño y desarrollo de ecommerce para moda urbana.',
+    images: ['/portafolio/online1.webp', '/portafolio/online2.jpeg', "/portafolio/online3.jpeg"],
+  },
+  {
+    title: 'Branding Corporativo',
+    desc: 'Identidad visual completa para consultora estratégica.',
+    images: ['/portafolio/starbucks.jpg', '/portafolio/starbucks2.png', "/portafolio/starbucks3.jpg"],
+  },
+  {
+    title: 'Branding Completo',
+    desc: 'Página de campaña moderna, clara y enfocada a conversiones.',
+    images: ['/portafolio/branding1.jpg', '/portafolio/branding2.jpeg', '/portafolio/branding3.jpeg'],
+  },
   {
     title: 'Tienda Online',
     desc: 'Diseño y desarrollo de ecommerce para moda urbana.',
@@ -35,7 +51,7 @@ const Portafolio = () => (
   <section id="portafolio" className="py-24 px-6 bg-gray-100 text-gray-900">
     <div className="max-w-6xl mx-auto text-center">
       <h2 className="text-5xl font-extrabold mb-6 tracking-tight">
-        Nuestro <span className="text-blue-600">Portafolio</span>
+        Nuestro <GradientText colors={["#c0c0c0", "#a9a9a9", "#e0e0e0", "#b0b0b0", "#d3d3d3"]}>Portafolio</GradientText>
       </h2>
       <p className="text-gray-600 text-lg mb-16 max-w-2xl mx-auto">
         Algunos proyectos que hemos desarrollado para marcas que confiaron en nosotros.
