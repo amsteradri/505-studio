@@ -35,29 +35,30 @@ const Navbar = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      const scrollY = window.scrollY + window.innerHeight / 4
-      let current = active
-
+      let closestSection = navItems[0].id
+      let closestOffset = Infinity
+  
       for (const item of navItems) {
         const section = document.getElementById(item.id)
         if (section) {
-          const { top, bottom } = section.getBoundingClientRect()
-          if (top <= window.innerHeight / 2 && bottom >= 100) {
-            current = item.id
-            break
+          const offset = Math.abs(section.getBoundingClientRect().top)
+          if (offset < closestOffset) {
+            closestOffset = offset
+            closestSection = item.id
           }
         }
       }
-
-      if (current !== active) {
-        setActive(current)
-        updateIndicator(current)
+  
+      if (closestSection !== active) {
+        setActive(closestSection)
+        updateIndicator(closestSection)
       }
     }
-
+  
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
   }, [active])
+  
 
   useEffect(() => {
     updateIndicator(active)
