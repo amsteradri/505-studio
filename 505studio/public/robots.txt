@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://www.505studio.com
+
+# Sitemaps
+Sitemap: https://www.505studio.com/sitemap.xml

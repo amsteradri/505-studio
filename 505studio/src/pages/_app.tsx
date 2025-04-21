@@ -8,14 +8,14 @@ import "slick-carousel/slick/slick-theme.css";
 import type { AppProps } from "next/app";
 
 export default function App({ Component, pageProps }: AppProps) {
-  const locale = pageProps.locale || 'es'; // Usa 'es' como idioma predeterminado
-  console.log('Idioma actual:', locale); // Verifica el idioma actual
-  console.log('Mensajes cargados:', pageProps.messages); // Verifica las traducciones cargadas
+  const locale = pageProps.locale || 'es'; // Idioma predeterminado
+  const timeZone = 'Europe/Madrid'; // ⚠️ Usa tu zona horaria real
 
   return (
     <IntlProvider
-      messages={pageProps.messages || {}} // Traducciones
-      locale={locale} // Idioma actual
+      messages={pageProps.messages || {}}
+      locale={locale}
+      timeZone={timeZone} // ✅ Agregá esta línea
     >
       <Component {...pageProps} />
     </IntlProvider>

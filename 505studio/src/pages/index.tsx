@@ -27,10 +27,22 @@ export default function Home() {
     <>
       <Head>
         <title>505 Studio - Agencia Creativa</title>
-        <meta name="description" content="Branding, diseño web, SEO y más." />
-        
-        
+        <meta name="description" content="Branding, diseño web, SEO, marketing digital y más. En 505 Studio ayudamos a las marcas a destacar." />
+        <meta name="keywords" content="agencia creativa, branding, diseño web, SEO, marketing digital, diseño gráfico, desarrollo web, publicidad" />
+        <meta name="author" content="505 Studio" />
+        <meta property="og:title" content="505 Studio - Agencia Creativa" />
+        <meta property="og:description" content="Branding, diseño web, SEO y más. En 505 Studio ayudamos a las marcas a destacar con soluciones creativas." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://www.505studio.com" />
+        <meta property="og:image" content="https://www.505studio.com/images/logo.png" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="505 Studio - Agencia Creativa" />
+        <meta name="twitter:description" content="Branding, diseño web, SEO y más. En 505 Studio ayudamos a las marcas a destacar." />
+        <meta name="twitter:image" content="https://www.505studio.com/images/logo.png" />
+        <link rel="canonical" href="https://www.505studio.com" />
+        <link rel="icon" href="/favicon.ico" />
       </Head>
+
       <LanguageSwitcher />
       <main className="font-sans">
         <NavBar />
