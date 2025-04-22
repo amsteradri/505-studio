@@ -84,7 +84,18 @@
     "message": "Mensaje",
     "messagePlaceholder": "Cuéntanos más sobre tu proyecto o tus dudas...",
     "submitButton": "Enviar mensaje"
-  }
+  },
+  "form": {
+  "title": "¡Suscríbete a nuestra Newsletter!",
+  "description": "Consigue un 30% de descuento en tu primer proyecto con nosotros.",
+  "emailPlaceholder": "Tu correo electrónico",
+  "submitButton": "Suscribirme",
+  "loading": "Cargando...",
+  "successMessage": "¡Gracias por suscribirte!",
+  "errorMessage": "Algo salió mal, por favor intenta de nuevo."
+}
   
   
 }
+
+

@@ -84,7 +84,17 @@
     "message": "Message",
     "messagePlaceholder": "Tell us more about your project or questions...",
     "submitButton": "Send Message"
-  }
+  },
+  "form": {
+  "title": "Subscribe to our Newsletter!",
+  "description": "Get a 30% discount on your first project with us.",
+  "emailPlaceholder": "Your email address",
+  "submitButton": "Subscribe",
+  "loading": "Loading...",
+  "successMessage": "Thank you for subscribing!",
+  "errorMessage": "Something went wrong, please try again."
+}
+
   
   
   
