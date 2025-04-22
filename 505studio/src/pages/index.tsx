@@ -5,6 +5,7 @@ import Portafolio from '@/components/Portafolio'
 import Contacto from '@/components/Contacto'
 import NavBar from '@/components/NavBar'
 import Who from '@/components/Who'
+import NewsletterForm from '@/components/Form'
 import LanguageSwitcher from '@/components/LanguageSwitcher'
 
 import { GetStaticPropsContext } from 'next';
@@ -46,11 +47,13 @@ export default function Home() {
       <LanguageSwitcher />
       <main className="font-sans">
         <NavBar />
+        
         <Hero />
         <Servicios />
         <Portafolio />
         <Who/>
         <Contacto />
+        <NewsletterForm />
       </main>
     </>
   )
