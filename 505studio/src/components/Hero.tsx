@@ -71,7 +71,6 @@ const Hero = () => {
     offset: ["start start", "end start"]
   });
 
-  const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
 
 
 
