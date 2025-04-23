@@ -4,6 +4,7 @@ import "@/styles/GradientText.css";
 import { IntlProvider } from 'next-intl'
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import AnimatedCursor from '@/components/AnimatedCursor';
 
 import type { AppProps } from "next/app";
 
@@ -17,6 +18,7 @@ export default function App({ Component, pageProps }: AppProps) {
       locale={locale}
       timeZone={timeZone} // ✅ Agregá esta línea
     >
+      <AnimatedCursor />
       <Component {...pageProps} />
     </IntlProvider>
   );
