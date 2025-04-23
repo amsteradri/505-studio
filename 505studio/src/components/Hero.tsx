@@ -3,6 +3,7 @@
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useTranslations } from 'next-intl';
 import { useRef } from 'react';
+import { useEffect, useState } from "react";
 
 import BlurText from "@/blocks/TextAnimations/BlurText/BlurText";
 import ShinyText from "@/blocks/TextAnimations/ShinyText/ShinyText";
@@ -32,6 +33,34 @@ const scrollToServicios = () => {
   }
 };
 
+export function useResponsiveValue<T>(mobile: T, tablet: T, desktop: T): T {
+  const [value, setValue] = useState<T>(() => getResponsiveValue(mobile, tablet, desktop));
+
+  useEffect(() => {
+    const handleResize = () => {
+      setValue(getResponsiveValue(mobile, tablet, desktop));
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, [mobile, tablet, desktop]);
+
+  return value;
+}
+
+function getResponsiveValue<T>(mobile: T, tablet: T, desktop: T): T {
+  if (typeof window === 'undefined') {
+    // Devuelve un valor predeterminado si se ejecuta en el servidor
+    return mobile;
+  }
+
+  const width = window.innerWidth;
+
+  if (width < 640) return mobile;          // Mobile: <640px
+  if (width < 1024) return tablet;         // Tablet: 640px - 1023px
+  return desktop;                          // Desktop: ≥1024px
+}
+
 const Hero = () => {
   const t = useTranslations('hero');
   const sectionRef = useRef(null);
@@ -42,56 +71,58 @@ const Hero = () => {
     offset: ["start start", "end start"]
   });
 
+  const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+
+
+
   // Valores de transformación extremadamente amplificados
   // Multiplicamos los valores anteriores para que el movimiento sea muchísimo más notable
-  const circle1Y = useTransform(scrollYProgress, [0, 1], [0, 1200]);  // Triplicado
-  const circle1X = useTransform(scrollYProgress, [0, 1], [0, 300]);   // Añadido movimiento horizontal
-  const circle1Rotate = useTransform(scrollYProgress, [0, 1], [0, 720]);  // Doble rotación completa
-  const circle1Scale = useTransform(scrollYProgress, [0, 1], [1, 2]);  // Añadido escalado
-  
-  const square1Y = useTransform(scrollYProgress, [0, 1], [0, -800]);  // Aumentado movimiento vertical
-  const square1X = useTransform(scrollYProgress, [0, 1], [0, 200]);   // Añadido movimiento horizontal
-  const square1Rotate = useTransform(scrollYProgress, [0, 1], [0, 360]);  // Rotación completa
-  const square1Scale = useTransform(scrollYProgress, [0, 1], [1, 0.5]);  // Reducción de tamaño
-  
-  const diamond1Y = useTransform(scrollYProgress, [0, 1], [0, 700]);  // Doble movimiento vertical
-  const diamond1X = useTransform(scrollYProgress, [0, 1], [0, -400]);  // Doble movimiento horizontal
-  const diamond1Rotate = useTransform(scrollYProgress, [0, 1], [45, 765]);  // Doble rotación más el ángulo inicial
-  const diamond1Scale = useTransform(scrollYProgress, [0, 1], [1, 1.8]);  // Aumento de tamaño
-  
-  // Movimiento extremo del título y texto
-  const titleOpacity = useTransform(scrollYProgress, [0, 0.6], [1, 0.2]);  // Mayor rango
-  const titleY = useTransform(scrollYProgress, [0, 0.6], [0, 300]);  // Triple desplazamiento
-  const titleX = useTransform(scrollYProgress, [0, 0.6], [0, 100]);  // Añadido desplazamiento horizontal
-  
-  const textOpacity = useTransform(scrollYProgress, [0.1, 0.7], [1, 0.1]);  // Mayor rango
-  const textY = useTransform(scrollYProgress, [0.1, 0.7], [0, 400]);  // Casi triple desplazamiento
-  const textX = useTransform(scrollYProgress, [0.1, 0.7], [0, -150]);  // Añadido desplazamiento horizontal
-  
-  const buttonOpacity = useTransform(scrollYProgress, [0.2, 0.8], [1, 0.1]);  // Mayor rango
-  const buttonY = useTransform(scrollYProgress, [0.2, 0.8], [0, 500]);  // Desplazamiento extremo
-  const buttonScale = useTransform(scrollYProgress, [0.2, 0.8], [1, 0.7]);  // Reducción de tamaño
+  const circle1Y = useTransform(scrollYProgress, [0, 1], [0, useResponsiveValue(600, 900, 1200)]);
+const circle1X = useTransform(scrollYProgress, [0, 1], [0, useResponsiveValue(100, 200, 300)]);
+const circle1Rotate = useTransform(scrollYProgress, [0, 1], [0, useResponsiveValue(360, 540, 720)]);
+const circle1Scale = useTransform(scrollYProgress, [0, 1], [1, useResponsiveValue(1.3, 1.6, 2)]);
 
-  // Figuras adicionales con movimientos extremos
-  const circle2Y = useTransform(scrollYProgress, [0, 1], [0, 900]);
-  const circle2X = useTransform(scrollYProgress, [0, 1], [0, 500]);
-  const circle2Scale = useTransform(scrollYProgress, [0, 1], [1, 2.5]);
-  const circle2Rotate = useTransform(scrollYProgress, [0, 1], [0, 540]);
-  
-  const square2Y = useTransform(scrollYProgress, [0, 1], [0, 700]);
-  const square2X = useTransform(scrollYProgress, [0, 1], [0, -600]);
-  const square2Rotate = useTransform(scrollYProgress, [0, 1], [0, 450]);
-  const square2Scale = useTransform(scrollYProgress, [0, 1], [1, 1.8]);
+const square1Y = useTransform(scrollYProgress, [0, 1], [0, useResponsiveValue(-400, -600, -800)]);
+const square1X = useTransform(scrollYProgress, [0, 1], [0, useResponsiveValue(100, 150, 200)]);
+const square1Rotate = useTransform(scrollYProgress, [0, 1], [0, useResponsiveValue(180, 270, 360)]);
+const square1Scale = useTransform(scrollYProgress, [0, 1], [1, useResponsiveValue(0.7, 0.6, 0.5)]);
 
-  // Nuevas figuras con movimientos exagerados
-  const triY = useTransform(scrollYProgress, [0, 1], [0, 1000]);
-  const triX = useTransform(scrollYProgress, [0, 1], [0, -300]);
-  const triRotate = useTransform(scrollYProgress, [0, 1], [0, 360]);
-  
-  const hexY = useTransform(scrollYProgress, [0, 1], [0, -900]);
-  const hexX = useTransform(scrollYProgress, [0, 1], [0, 350]);
-  const hexRotate = useTransform(scrollYProgress, [0, 1], [0, 180]);
-  const hexScale = useTransform(scrollYProgress, [0, 1], [1, 2.2]);
+const diamond1Y = useTransform(scrollYProgress, [0, 1], [0, useResponsiveValue(400, 550, 700)]);
+const diamond1X = useTransform(scrollYProgress, [0, 1], [0, useResponsiveValue(-250, -330, -400)]);
+const diamond1Rotate = useTransform(scrollYProgress, [0, 1], [45, useResponsiveValue(540, 650, 765)]);
+const diamond1Scale = useTransform(scrollYProgress, [0, 1], [1, useResponsiveValue(1.3, 1.5, 1.8)]);
+
+const titleOpacity = useTransform(scrollYProgress, [0, 0.6], [1, 0.2]);
+const titleY = useTransform(scrollYProgress, [0, 0.6], [0, useResponsiveValue(150, 220, 300)]);
+const titleX = useTransform(scrollYProgress, [0, 0.6], [0, useResponsiveValue(50, 75, 100)]);
+
+const textOpacity = useTransform(scrollYProgress, [0.1, 0.7], [1, 0.1]);
+const textY = useTransform(scrollYProgress, [0.1, 0.7], [0, useResponsiveValue(250, 320, 400)]);
+const textX = useTransform(scrollYProgress, [0.1, 0.7], [0, useResponsiveValue(-100, -120, -150)]);
+
+const buttonOpacity = useTransform(scrollYProgress, [0.2, 0.8], [1, 0.1]);
+const buttonY = useTransform(scrollYProgress, [0.2, 0.8], [0, useResponsiveValue(300, 400, 500)]);
+const buttonScale = useTransform(scrollYProgress, [0.2, 0.8], [1, useResponsiveValue(0.85, 0.75, 0.7)]);
+
+const circle2Y = useTransform(scrollYProgress, [0, 1], [0, useResponsiveValue(600, 750, 900)]);
+const circle2X = useTransform(scrollYProgress, [0, 1], [0, useResponsiveValue(300, 400, 500)]);
+const circle2Scale = useTransform(scrollYProgress, [0, 1], [1, useResponsiveValue(1.8, 2.1, 2.5)]);
+const circle2Rotate = useTransform(scrollYProgress, [0, 1], [0, useResponsiveValue(360, 450, 540)]);
+
+const square2Y = useTransform(scrollYProgress, [0, 1], [0, useResponsiveValue(400, 550, 700)]);
+const square2X = useTransform(scrollYProgress, [0, 1], [0, useResponsiveValue(-400, -500, -600)]);
+const square2Rotate = useTransform(scrollYProgress, [0, 1], [0, useResponsiveValue(300, 375, 450)]);
+const square2Scale = useTransform(scrollYProgress, [0, 1], [1, useResponsiveValue(1.4, 1.6, 1.8)]);
+
+const triY = useTransform(scrollYProgress, [0, 1], [0, useResponsiveValue(600, 800, 1000)]);
+const triX = useTransform(scrollYProgress, [0, 1], [0, useResponsiveValue(-150, -220, -300)]);
+const triRotate = useTransform(scrollYProgress, [0, 1], [0, useResponsiveValue(240, 300, 360)]);
+
+const hexY = useTransform(scrollYProgress, [0, 1], [0, useResponsiveValue(-600, -750, -900)]);
+const hexX = useTransform(scrollYProgress, [0, 1], [0, useResponsiveValue(200, 280, 350)]);
+const hexRotate = useTransform(scrollYProgress, [0, 1], [0, useResponsiveValue(120, 150, 180)]);
+const hexScale = useTransform(scrollYProgress, [0, 1], [1, useResponsiveValue(1.6, 1.9, 2.2)]);
+
 
   return (
     <section 
@@ -110,7 +141,7 @@ const Hero = () => {
       </div>
 
       {/* Figuras geométricas decorativas - Movimiento extremo */}
-      <div className="absolute inset-0 z-1 overflow-hidden pointer-events-none">
+      <div className="absolute inset-0 z-1 overflow-hidden pointer-events-none hidden md:block">
         {/* Círculo original con movimiento extremo */}
         <motion.div
           className="absolute w-32 h-32 bg-[#00fff7]/10 border border-[#00fff7]/30 rounded-full"
@@ -139,7 +170,7 @@ const Hero = () => {
         <motion.div
           className="absolute w-16 h-16 bg-[#f9f871]/10 border border-[#f9f871]/30 rotate-45"
           style={{ 
-            top: '70%',  // <- aquí lo bajamos
+            top: '80%',  // <- aquí lo bajamos
             left: '40%',
             y: diamond1Y,
             x: diamond1X,
