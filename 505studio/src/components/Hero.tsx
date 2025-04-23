@@ -190,8 +190,8 @@ const Hero = () => {
           className="absolute w-24 h-24 bg-[#9b59b6]/15 border border-[#9b59b6]/40"
           style={{ 
             clipPath: 'polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)',
-            bottom: '30%', 
-            right: '25%',
+            bottom: '10%', 
+            right: '5%',
             y: hexY,
             x: hexX,
             rotate: hexRotate,
