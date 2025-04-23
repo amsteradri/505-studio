@@ -11,14 +11,14 @@ import type { AppProps } from "next/app";
 export default function App({ Component, pageProps }: AppProps) {
   const locale = pageProps.locale || 'es'; // Idioma predeterminado
   const timeZone = 'Europe/Madrid'; // ⚠️ Usa tu zona horaria real
-
+  const isMobile = typeof window !== 'undefined' && window.innerWidth <= 768;
   return (
     <IntlProvider
       messages={pageProps.messages || {}}
       locale={locale}
       timeZone={timeZone} // ✅ Agregá esta línea
     >
-      <AnimatedCursor />
+      {!isMobile && <AnimatedCursor />}
       <Component {...pageProps} />
     </IntlProvider>
   );

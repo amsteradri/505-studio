@@ -24,6 +24,8 @@ export async function getStaticProps({ locale }: GetStaticPropsContext) {
 }
 
 
+
+
 export default function Home() {
   return (
     <>
