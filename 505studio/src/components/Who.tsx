@@ -3,7 +3,6 @@
 import { motion } from 'framer-motion';
 import { FaLinkedin, FaGithub, FaBehance } from 'react-icons/fa';
 import { useTranslations } from 'next-intl';
-
 import { GetStaticPropsContext } from 'next';
 
 export async function getStaticProps({ locale }: GetStaticPropsContext) {
@@ -39,49 +38,52 @@ const Who = () => {
   return (
     <section
       id="who"
-      className="relative py-24 px-6 bg-gradient-to-b from-[#F5F5F5] via-white to-[#F5F5F5] text-[#212121] overflow-hidden"
+      className="relative py-28 px-6 bg-white text-[#212121]"
     >
       <div className="max-w-6xl mx-auto text-center">
         <motion.h2
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="text-5xl md:text-6xl font-extrabold tracking-tight mb-16"
+          className="text-5xl md:text-6xl font-bold tracking-tight mb-20"
         >
           {t('title')}
         </motion.h2>
 
-        <div className="grid md:grid-cols-2 gap-12">
+        <div className="grid md:grid-cols-2 gap-16">
           {team.map((member, index) => (
             <motion.div
-              key={member.name}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.2, duration: 0.8 }}
-              className="bg-white border border-[#BDBDBD] rounded-2xl shadow-md p-8 text-center"
-            >
+            key={member.name}
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.6, ease: 'easeOut' }}
+            className="bg-white border border-gray-200 rounded-2xl p-10 text-center transition-all duration-300"
+          >
+          
+            
               <img
                 src={member.image}
                 alt={member.name}
-                className="w-32 h-32 mx-auto rounded-full object-cover border-4 border-[#C0C0C0] mb-6"
+                className="w-28 h-28 mx-auto rounded-full object-cover border-2 border-gray-300 mb-6"
               />
-              <h3 className="text-2xl font-semibold mb-1 text-[#212121]">{member.name}</h3>
-              <p className="text-[#757575] font-medium mb-4">{member.role}</p>
-              <p className="text-[#424242] text-sm mb-6 max-w-xs mx-auto">{member.bio}</p>
+              <h3 className="text-2xl font-semibold mb-1">{member.name}</h3>
+              <p className="text-gray-500 font-medium mb-4">{member.role}</p>
+              <p className="text-gray-600 text-sm mb-6 max-w-sm mx-auto leading-relaxed">{member.bio}</p>
 
-              <div className="flex justify-center gap-5 text-2xl text-[#424242]">
+              <div className="flex justify-center gap-5 text-2xl text-gray-600">
                 {member.linkedin && (
-                  <a href={member.linkedin} target="_blank" rel="noopener noreferrer" className="hover:text-[#C0C0C0]">
+                  <a href={member.linkedin} target="_blank" rel="noopener noreferrer" className="hover:text-[#0a66c2] transition-colors">
                     <FaLinkedin />
                   </a>
                 )}
                 {member.github && (
-                  <a href={member.github} target="_blank" rel="noopener noreferrer" className="hover:text-[#C0C0C0]">
+                  <a href={member.github} target="_blank" rel="noopener noreferrer" className="hover:text-[#333] transition-colors">
                     <FaGithub />
                   </a>
                 )}
                 {member.behance && (
-                  <a href={member.behance} target="_blank" rel="noopener noreferrer" className="hover:text-[#C0C0C0]">
+                  <a href={member.behance} target="_blank" rel="noopener noreferrer" className="hover:text-[#1769ff] transition-colors">
                     <FaBehance />
                   </a>
                 )}
