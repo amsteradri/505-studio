@@ -3,8 +3,10 @@
 import { FaPaintBrush, FaLaptopCode, FaSearch } from 'react-icons/fa';
 import GradientText from "@/blocks/TextAnimations/GradientText/GradientText";
 import { useTranslations } from 'next-intl';
-
 import { GetStaticPropsContext } from 'next';
+
+import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef } from 'react';
 
 export async function getStaticProps({ locale }: GetStaticPropsContext) {
   return {
@@ -50,10 +52,26 @@ const Servicios = () => {
     },
   ];
 
+  const sectionRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end start"]
+  });
+
+  const directions = [
+    { x: -100, y: 40, rotate: -5 },
+    { x: 100, y: 40, rotate: 5 },
+    { x: 0, y: 100, rotate: 7 },
+    { x: 0, y: -100, rotate: -7 },
+    { x: -70, y: -70, rotate: 10 },
+    { x: 70, y: 70, rotate: -10 },
+  ];
+
   return (
     <section
       id="servicios"
-      className="py-24 px-6 bg-white text-gray-900"
+      className="py-32 px-6 bg-white text-gray-900"
+      ref={sectionRef}
     >
       <div className="max-w-6xl mx-auto text-center">
         <h2 className="text-5xl font-extrabold mb-6 tracking-tight">
@@ -65,16 +83,58 @@ const Servicios = () => {
         </p>
 
         <div className="grid md:grid-cols-3 gap-12">
-          {servicios.map(({ icon, title, desc }, i) => (
-            <div
-              key={i}
-              className="p-8 bg-white rounded-2xl shadow-xl border border-gray-100 hover:shadow-2xl transition-all duration-300 text-left hover:-translate-y-1"
-            >
-              {icon}
-              <h3 className="text-2xl font-semibold mb-3 text-gray-800">{title}</h3>
-              <p className="text-gray-600 leading-relaxed">{desc}</p>
-            </div>
-          ))}
+          {servicios.map(({ icon, title, desc }, i) => {
+            const dir = directions[i % directions.length];
+            
+            // Animación más lenta para entrada, más rápida para salida
+            const x = useTransform(
+              scrollYProgress, 
+              [0.1, 0.35, 0.7, 0.85], 
+              [dir.x, 0, 0, dir.x]
+            );
+            
+            const y = useTransform(
+              scrollYProgress, 
+              [0.1, 0.35, 0.7, 0.85], 
+              [dir.y, 0, 0, dir.y]
+            );
+            
+            const rotate = useTransform(
+              scrollYProgress, 
+              [0.1, 0.35, 0.7, 0.85], 
+              [dir.rotate, 0, 0, dir.rotate]
+            );
+            
+            const opacity = useTransform(
+              scrollYProgress, 
+              [0.05, 0.25, 0.75, 0.9], 
+              [0, 1, 1, 0]
+            );
+
+            return (
+              <motion.div
+                key={i}
+                style={{ x, y, rotate, opacity }}
+                transition={{ 
+                  type: "spring",
+                  // Configuración diferente para entrada y salida
+                  duration: (transitionEnd: number) => { // Especificamos el tipo como 'number'
+                    // El 'transitionEnd' es el valor objetivo actual de la propiedad
+                    // Si es 0 (entrando al viewport) usamos la duración lenta
+                    // Si no es 0 (saliendo del viewport) usamos la duración rápida
+                    return transitionEnd !== 0 ? 0.6 : 1.2;
+                  },
+                  ease: [0.16, 1, 0.3, 1],
+                  delay: i * 0.07 // Aumenté ligeramente el retraso entre elementos
+                }}
+                className="p-8 bg-white rounded-2xl shadow-xl border border-gray-100 hover:shadow-2xl transition-all duration-300 text-left hover:-translate-y-1"
+              >
+                {icon}
+                <h3 className="text-2xl font-semibold mb-3 text-gray-800">{title}</h3>
+                <p className="text-gray-600 leading-relaxed">{desc}</p>
+              </motion.div>
+            );
+          })}
         </div>
       </div>
     </section>
