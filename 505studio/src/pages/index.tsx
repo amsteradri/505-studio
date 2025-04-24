@@ -7,6 +7,7 @@ import NavBar from '@/components/NavBar'
 import Who from '@/components/Who'
 import NewsletterForm from '@/components/Form'
 import LanguageSwitcher from '@/components/LanguageSwitcher'
+
 import { Analytics } from "@vercel/analytics/react"
 
 import { GetStaticPropsContext } from 'next';
@@ -49,8 +50,8 @@ export default function Home() {
       <Analytics/>
       <LanguageSwitcher />
       <main className="font-sans">
+      
         <NavBar />
-        
         <Hero />
         <Servicios />
         <Portafolio />
