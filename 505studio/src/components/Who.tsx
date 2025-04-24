@@ -51,7 +51,7 @@ const Who = () => {
         </motion.h2>
 
         <div className="grid md:grid-cols-2 gap-16">
-          {team.map((member, index) => (
+          {team.map((member) => (
             <motion.div
             key={member.name}
             initial={{ opacity: 0, scale: 0.95 }}
