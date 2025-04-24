@@ -58,22 +58,21 @@ const Servicios = () => {
     offset: ["start end", "end start"]
   });
 
-  const directions = [
+  // Calculamos las transformaciones fuera del callback
+  const transforms = [
     { x: -100, y: 40, rotate: -5 },
     { x: 100, y: 40, rotate: 5 },
     { x: 0, y: 100, rotate: 7 },
     { x: 0, y: -100, rotate: -7 },
     { x: -70, y: -70, rotate: 10 },
     { x: 70, y: 70, rotate: -10 },
-  ];
-
-  // Calculamos las transformaciones fuera del callback
-  const transforms = directions.map((dir) => ({
-    x: useTransform(scrollYProgress, [0.1, 0.35, 0.7, 0.85], [dir.x, 0, 0, dir.x]),
-    y: useTransform(scrollYProgress, [0.1, 0.35, 0.7, 0.85], [dir.y, 0, 0, dir.y]),
-    rotate: useTransform(scrollYProgress, [0.1, 0.35, 0.7, 0.85], [dir.rotate, 0, 0, dir.rotate]),
-    opacity: useTransform(scrollYProgress, [0.05, 0.25, 0.75, 0.9], [0, 1, 1, 0]),
+  ].map(dir => ({
+    x: useTransform(scrollYProgress, [0.1, 0.35, 0.85, 0.98], [dir.x, 0, 0, dir.x]),
+    y: useTransform(scrollYProgress, [0.1, 0.35, 0.85, 0.98], [dir.y, 0, 0, dir.y]),
+    rotate: useTransform(scrollYProgress, [0.1, 0.35, 0.85, 0.98], [dir.rotate, 0, 0, dir.rotate]),
+    opacity: useTransform(scrollYProgress, [0.05, 0.25, 0.92, 1], [0, 1, 1, 0]),
   }));
+  
 
   return (
     <section
@@ -98,14 +97,13 @@ const Servicios = () => {
               <motion.div
                 key={i}
                 style={{ x, y, rotate, opacity }}
-                transition={{ 
-                  type: "spring",
-                  duration: (transitionEnd: number) => {
-                    return transitionEnd !== 0 ? 0.6 : 1.2;
-                  },
-                  ease: [0.16, 1, 0.3, 1],
-                  delay: i * 0.07
+                transition={{
+                  type: "tween",
+                  ease: [0.25, 1, 0.5, 1],
+                  duration: 0.6,
+                  delay: i * 0.06,
                 }}
+                
                 className="p-8 bg-white rounded-2xl shadow-xl border border-gray-100 hover:shadow-2xl transition-all duration-300 text-left hover:-translate-y-1"
               >
                 {icon}
