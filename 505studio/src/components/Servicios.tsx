@@ -67,6 +67,14 @@ const Servicios = () => {
     { x: 70, y: 70, rotate: -10 },
   ];
 
+  // Calculamos las transformaciones fuera del callback
+  const transforms = directions.map((dir) => ({
+    x: useTransform(scrollYProgress, [0.1, 0.35, 0.7, 0.85], [dir.x, 0, 0, dir.x]),
+    y: useTransform(scrollYProgress, [0.1, 0.35, 0.7, 0.85], [dir.y, 0, 0, dir.y]),
+    rotate: useTransform(scrollYProgress, [0.1, 0.35, 0.7, 0.85], [dir.rotate, 0, 0, dir.rotate]),
+    opacity: useTransform(scrollYProgress, [0.05, 0.25, 0.75, 0.9], [0, 1, 1, 0]),
+  }));
+
   return (
     <section
       id="servicios"
@@ -84,32 +92,7 @@ const Servicios = () => {
 
         <div className="grid md:grid-cols-3 gap-12">
           {servicios.map(({ icon, title, desc }, i) => {
-            const dir = directions[i % directions.length];
-            
-            // Animación más lenta para entrada, más rápida para salida
-            const x = useTransform(
-              scrollYProgress, 
-              [0.1, 0.35, 0.7, 0.85], 
-              [dir.x, 0, 0, dir.x]
-            );
-            
-            const y = useTransform(
-              scrollYProgress, 
-              [0.1, 0.35, 0.7, 0.85], 
-              [dir.y, 0, 0, dir.y]
-            );
-            
-            const rotate = useTransform(
-              scrollYProgress, 
-              [0.1, 0.35, 0.7, 0.85], 
-              [dir.rotate, 0, 0, dir.rotate]
-            );
-            
-            const opacity = useTransform(
-              scrollYProgress, 
-              [0.05, 0.25, 0.75, 0.9], 
-              [0, 1, 1, 0]
-            );
+            const { x, y, rotate, opacity } = transforms[i % transforms.length];
 
             return (
               <motion.div
@@ -117,15 +100,11 @@ const Servicios = () => {
                 style={{ x, y, rotate, opacity }}
                 transition={{ 
                   type: "spring",
-                  // Configuración diferente para entrada y salida
-                  duration: (transitionEnd: number) => { // Especificamos el tipo como 'number'
-                    // El 'transitionEnd' es el valor objetivo actual de la propiedad
-                    // Si es 0 (entrando al viewport) usamos la duración lenta
-                    // Si no es 0 (saliendo del viewport) usamos la duración rápida
+                  duration: (transitionEnd: number) => {
                     return transitionEnd !== 0 ? 0.6 : 1.2;
                   },
                   ease: [0.16, 1, 0.3, 1],
-                  delay: i * 0.07 // Aumenté ligeramente el retraso entre elementos
+                  delay: i * 0.07
                 }}
                 className="p-8 bg-white rounded-2xl shadow-xl border border-gray-100 hover:shadow-2xl transition-all duration-300 text-left hover:-translate-y-1"
               >
