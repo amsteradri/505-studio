@@ -4,7 +4,7 @@ import { useEffect, useState, useRef } from 'react'
 import { motion} from 'framer-motion'
 import { Menu, X } from 'lucide-react'
 import { useTranslations } from 'next-intl'
-import AnimatedSVG from '@/components/AnimatedSVG'
+// import AnimatedSVG from '@/components/AnimatedSVG'
 
 const Navbar = () => {
   const t = useTranslations()
