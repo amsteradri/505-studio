@@ -57,42 +57,44 @@ const Servicios = () => {
     offset: ["start end", "end start"]
   });
 
-  // Definir transformaciones individualmente (una por cada item)
-  const x0 = useTransform(scrollYProgress, [0.1, 0.35, 0.85, 0.98], [-100, 0, 0, -100]);
-  const y0 = useTransform(scrollYProgress, [0.1, 0.35, 0.85, 0.98], [40, 0, 0, 40]);
-  const r0 = useTransform(scrollYProgress, [0.1, 0.35, 0.85, 0.98], [-5, 0, 0, -5]);
-
-  const x1 = useTransform(scrollYProgress, [0.1, 0.35, 0.85, 0.98], [100, 0, 0, 100]);
-  const y1 = useTransform(scrollYProgress, [0.1, 0.35, 0.85, 0.98], [40, 0, 0, 40]);
-  const r1 = useTransform(scrollYProgress, [0.1, 0.35, 0.85, 0.98], [5, 0, 0, 5]);
-
-  const x2 = useTransform(scrollYProgress, [0.1, 0.35, 0.85, 0.98], [0, 0, 0, 0]);
-  const y2 = useTransform(scrollYProgress, [0.1, 0.35, 0.85, 0.98], [100, 0, 0, 100]);
-  const r2 = useTransform(scrollYProgress, [0.1, 0.35, 0.85, 0.98], [7, 0, 0, 7]);
-
-  const x3 = useTransform(scrollYProgress, [0.1, 0.35, 0.85, 0.98], [0, 0, 0, 0]);
-  const y3 = useTransform(scrollYProgress, [0.1, 0.35, 0.85, 0.98], [-100, 0, 0, -100]);
-  const r3 = useTransform(scrollYProgress, [0.1, 0.35, 0.85, 0.98], [-7, 0, 0, -7]);
-
-  const x4 = useTransform(scrollYProgress, [0.1, 0.35, 0.85, 0.98], [-70, 0, 0, -70]);
-  const y4 = useTransform(scrollYProgress, [0.1, 0.35, 0.85, 0.98], [-70, 0, 0, -70]);
-  const r4 = useTransform(scrollYProgress, [0.1, 0.35, 0.85, 0.98], [10, 0, 0, 10]);
-
-  const x5 = useTransform(scrollYProgress, [0.1, 0.35, 0.85, 0.98], [70, 0, 0, 70]);
-  const y5 = useTransform(scrollYProgress, [0.1, 0.35, 0.85, 0.98], [70, 0, 0, 70]);
-  const r5 = useTransform(scrollYProgress, [0.1, 0.35, 0.85, 0.98], [-10, 0, 0, -10]);
-
-  const opacities = servicios.map((_, i) =>
-    useTransform(scrollYProgress, [0.05, 0.25, 0.92, 1], [0, 1, 1, 0])
-  );
-
+  // Transformaciones definidas por separado
   const transforms = [
-    { x: x0, y: y0, rotate: r0, opacity: opacities[0] },
-    { x: x1, y: y1, rotate: r1, opacity: opacities[1] },
-    { x: x2, y: y2, rotate: r2, opacity: opacities[2] },
-    { x: x3, y: y3, rotate: r3, opacity: opacities[3] },
-    { x: x4, y: y4, rotate: r4, opacity: opacities[4] },
-    { x: x5, y: y5, rotate: r5, opacity: opacities[5] },
+    {
+      x: useTransform(scrollYProgress, [0.1, 0.35, 0.85, 0.98], [-100, 0, 0, -100]),
+      y: useTransform(scrollYProgress, [0.1, 0.35, 0.85, 0.98], [40, 0, 0, 40]),
+      rotate: useTransform(scrollYProgress, [0.1, 0.35, 0.85, 0.98], [-5, 0, 0, -5]),
+      opacity: useTransform(scrollYProgress, [0.05, 0.25, 0.92, 1], [0, 1, 1, 0]),
+    },
+    {
+      x: useTransform(scrollYProgress, [0.1, 0.35, 0.85, 0.98], [100, 0, 0, 100]),
+      y: useTransform(scrollYProgress, [0.1, 0.35, 0.85, 0.98], [40, 0, 0, 40]),
+      rotate: useTransform(scrollYProgress, [0.1, 0.35, 0.85, 0.98], [5, 0, 0, 5]),
+      opacity: useTransform(scrollYProgress, [0.05, 0.25, 0.92, 1], [0, 1, 1, 0]),
+    },
+    {
+      x: useTransform(scrollYProgress, [0.1, 0.35, 0.85, 0.98], [0, 0, 0, 0]),
+      y: useTransform(scrollYProgress, [0.1, 0.35, 0.85, 0.98], [100, 0, 0, 100]),
+      rotate: useTransform(scrollYProgress, [0.1, 0.35, 0.85, 0.98], [7, 0, 0, 7]),
+      opacity: useTransform(scrollYProgress, [0.05, 0.25, 0.92, 1], [0, 1, 1, 0]),
+    },
+    {
+      x: useTransform(scrollYProgress, [0.1, 0.35, 0.85, 0.98], [0, 0, 0, 0]),
+      y: useTransform(scrollYProgress, [0.1, 0.35, 0.85, 0.98], [-100, 0, 0, -100]),
+      rotate: useTransform(scrollYProgress, [0.1, 0.35, 0.85, 0.98], [-7, 0, 0, -7]),
+      opacity: useTransform(scrollYProgress, [0.05, 0.25, 0.92, 1], [0, 1, 1, 0]),
+    },
+    {
+      x: useTransform(scrollYProgress, [0.1, 0.35, 0.85, 0.98], [-70, 0, 0, -70]),
+      y: useTransform(scrollYProgress, [0.1, 0.35, 0.85, 0.98], [-70, 0, 0, -70]),
+      rotate: useTransform(scrollYProgress, [0.1, 0.35, 0.85, 0.98], [10, 0, 0, 10]),
+      opacity: useTransform(scrollYProgress, [0.05, 0.25, 0.92, 1], [0, 1, 1, 0]),
+    },
+    {
+      x: useTransform(scrollYProgress, [0.1, 0.35, 0.85, 0.98], [70, 0, 0, 70]),
+      y: useTransform(scrollYProgress, [0.1, 0.35, 0.85, 0.98], [70, 0, 0, 70]),
+      rotate: useTransform(scrollYProgress, [0.1, 0.35, 0.85, 0.98], [-10, 0, 0, -10]),
+      opacity: useTransform(scrollYProgress, [0.05, 0.25, 0.92, 1], [0, 1, 1, 0]),
+    },
   ];
 
   return (
@@ -115,7 +117,7 @@ const Servicios = () => {
 
         <div className="grid md:grid-cols-3 gap-12">
           {servicios.map(({ icon, title, desc }, i) => {
-            const { x, y, rotate, opacity } = transforms[i % transforms.length];
+            const { x, y, rotate, opacity } = transforms[i];
             return (
               <motion.div
                 key={i}
