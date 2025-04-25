@@ -95,12 +95,36 @@ const Navbar = () => {
         <motion.img
           src="/505 STUDIO-04.svg"
           alt="505 Studio Logo"
-          className="h-6 w-auto"
+          className="h-24 w-auto" // Aumentamos de h-10 a h-16 para hacerlo más grande
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5 }}
         />
       </div>
+
+      {/* Menú móvil desplegable */}
+      <motion.div
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ 
+          opacity: menuOpen ? 1 : 0,
+          y: menuOpen ? 0 : -20 
+        }}
+        className={`${
+          menuOpen ? 'flex' : 'hidden'
+        } md:hidden fixed top-20 left-4 z-50 flex-col gap-4 bg-[#212121]/95 backdrop-blur-md border border-[#424242] rounded-lg shadow-lg p-4`}
+      >
+        {navItems.map(item => (
+          <button
+            key={item.id}
+            onClick={() => scrollToSection(item.id)}
+            className={`text-left px-4 py-2 rounded-md transition-colors duration-300 ${
+              active === item.id ? 'text-[#C0C0C0] bg-[#313131]' : 'text-[#F5F5F5] hover:bg-[#313131] hover:text-[#BDBDBD]'
+            }`}
+          >
+            {item.label}
+          </button>
+        ))}
+      </motion.div>
 
       {/* Desktop Navbar */}
       <div className="fixed top-0 left-0 right-0 z-40 flex justify-center">

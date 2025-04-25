@@ -1,8 +1,8 @@
 // src/components/AnimatedSVG.tsx
-'use client';
+"use client";
 
-import React, { useEffect, useRef } from 'react';
-import { animate, svg } from 'animejs';
+import React, { useEffect, useRef } from "react";
+import { animate, svg } from "animejs";
 
 const AnimatedSVG = () => {
   const svgRef = useRef<SVGSVGElement>(null);
@@ -10,14 +10,14 @@ const AnimatedSVG = () => {
   useEffect(() => {
     if (!svgRef.current) return;
 
-    const pathElements = svgRef.current.querySelectorAll('path');
+    const pathElements = svgRef.current.querySelectorAll("path");
     if (!pathElements.length) return;
 
-    pathElements.forEach(path => {
+    pathElements.forEach((path) => {
       const [drawable] = svg.createDrawable(path);
       animate(drawable, {
-        draw: ['0 0', '0 1', '1 1'],
-        easing: 'inOutQuad',
+        draw: ["0 0", "0 1", "1 1"],
+        easing: "inOutQuad",
         duration: 2000,
         loop: true,
       });
@@ -32,7 +32,7 @@ const AnimatedSVG = () => {
       xmlns="http://www.w3.org/2000/svg"
       viewBox="130 100 50 50"
       className="w-full h-full text-[#F5F5F5]"
-      style={{ fill: 'currentColor' }}
+      style={{ fill: "currentColor" }}
     >
       <g>
         {/* Actualiza el fill a blanco para que sea visible en el navbar oscuro */}
