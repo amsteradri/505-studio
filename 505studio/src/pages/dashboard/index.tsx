@@ -16,11 +16,11 @@ import Link from "next/link";
 import { useState } from "react";
 
 // Mock de proyectos
-const mockProjects = [
+const mockProjects: Project[] = [
   {
     id: 1,
     name: "Rediseño Landing Page",
-    status: "En trabajo",
+    status: "En trabajo", // Coincide con el tipo literal
     members: ["Carlos", "María"],
     description: "Rediseño completo de la landing para aumentar conversiones.",
     progress: 65,
@@ -29,7 +29,7 @@ const mockProjects = [
   {
     id: 2,
     name: "Integración API Pago",
-    status: "Esperando",
+    status: "Esperando", // Coincide con el tipo literal
     members: ["Lucía", "Pedro"],
     description: "Integración de Stripe para pagos con tarjeta.",
     progress: 25,
@@ -38,7 +38,7 @@ const mockProjects = [
   {
     id: 3,
     name: "Dashboard Administrativo",
-    status: "Acabado",
+    status: "Acabado", // Coincide con el tipo literal
     members: ["Ana", "Jorge"],
     description: "Panel de control para gestionar usuarios y contenido.",
     progress: 100,
@@ -219,34 +219,27 @@ export default function Dashboard() {
 }
 
 // Componente de tarjeta de estadísticas
-function StatCard({ title, value, change, positive, icon, color }) {
+interface StatCardProps {
+  title: string;
+  value: string | number;
+  change: string | number;
+  positive: boolean;
+  icon: React.ReactNode;
+  color: 'blue' | 'amber' | 'emerald';
+}
+
+function StatCard({ title, value, change, positive, icon, color }: StatCardProps) {
   const getColorClasses = () => {
-    switch(color) {
-      case 'blue': return {
-        bgLight: 'bg-blue-500/10',
-        bgDark: '[#3b82f6]',
-        text: 'text-blue-500'
-      };
-      case 'amber': return {
-        bgLight: 'bg-amber-500/10',
-        bgDark: '[#f59e0b]',
-        text: 'text-amber-500'
-      };
-      case 'emerald': return {
-        bgLight: 'bg-emerald-500/10',
-        bgDark: '[#10b981]',
-        text: 'text-emerald-500'
-      };
-      default: return {
-        bgLight: 'bg-blue-500/10',
-        bgDark: '[#3b82f6]',
-        text: 'text-blue-500'
-      };
+    switch (color) {
+      case 'blue': return { bgLight: 'bg-blue-500/10', text: 'text-blue-500' };
+      case 'amber': return { bgLight: 'bg-amber-500/10', text: 'text-amber-500' };
+      case 'emerald': return { bgLight: 'bg-emerald-500/10', text: 'text-emerald-500' };
+      default: return { bgLight: 'bg-blue-500/10', text: 'text-blue-500' };
     }
   };
-  
+
   const colorClasses = getColorClasses();
-  
+
   return (
     <div className="bg-white/5 backdrop-blur-md rounded-2xl p-6 border border-white/10 shadow-lg hover:shadow-xl transition-all duration-300">
       <div className="flex items-center justify-between mb-4">
@@ -273,28 +266,25 @@ function StatCard({ title, value, change, positive, icon, color }) {
 }
 
 // Componente de tarjeta de proyecto
-function ProjectCard({ project }) {
-  // Define colores por estado
+interface Project {
+  id: number;
+  name: string;
+  status: 'En trabajo' | 'Esperando' | 'Acabado';
+  members: string[];
+  description: string;
+  progress: number;
+  dueDate: string;
+}
+
+function ProjectCard({ project }: { project: Project }) {
   const statusColors = {
-    "En trabajo": {
-      bg: "bg-amber-500/10",
-      text: "text-amber-500",
-      border: "border-amber-500/20"
-    },
-    "Esperando": {
-      bg: "bg-blue-500/10",
-      text: "text-blue-500",
-      border: "border-blue-500/20"
-    },
-    "Acabado": {
-      bg: "bg-emerald-500/10",
-      text: "text-emerald-500",
-      border: "border-emerald-500/20"
-    }
+    "En trabajo": { bg: "bg-amber-500/10", text: "text-amber-500", border: "border-amber-500/20" },
+    "Esperando": { bg: "bg-blue-500/10", text: "text-blue-500", border: "border-blue-500/20" },
+    "Acabado": { bg: "bg-emerald-500/10", text: "text-emerald-500", border: "border-emerald-500/20" }
   };
-  
-  const colors = statusColors[project.status] || statusColors["En trabajo"];
-  
+
+  const colors = statusColors[project.status as keyof typeof statusColors];
+
   return (
     <div className="bg-white/5 backdrop-blur-md rounded-2xl border border-white/10 shadow-lg overflow-hidden group hover:shadow-xl hover:border-white/20 transition-all duration-300">
       {/* Barra de estado superior con degradado */}
@@ -350,7 +340,7 @@ function ProjectCard({ project }) {
           </div>
           
           <div className="flex -space-x-2">
-            {project.members.map((member, index) => (
+            {project.members.map((member: string, index: number) => (
               <div 
                 key={index}
                 className="w-8 h-8 rounded-full bg-gradient-to-br from-[#3b82f6] to-[#60a5fa] flex items-center justify-center text-xs font-medium text-white border-2 border-[#0f172a]"
@@ -410,24 +400,7 @@ function NavItem({
   );
 }
 
-function ShinyText({
-  text,
-  speed,
-  className,
-}: {
-  text: string;
-  speed: number;
-  className?: string;
-}) {
-  return (
-    <span
-      className={`shiny-text ${className}`}
-      style={{ animationDuration: `${speed}s`, fontWeight: "bold" }}
-    >
-      {text}
-    </span>
-  );
-}
+
 
 // Protección del dashboard
 export const getServerSideProps: GetServerSideProps = async (context) => {
