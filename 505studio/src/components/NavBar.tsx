@@ -4,6 +4,8 @@ import { useEffect, useState, useRef } from 'react'
 import { motion} from 'framer-motion'
 import { Menu, X } from 'lucide-react'
 import { useTranslations } from 'next-intl'
+import { signIn } from "next-auth/react"
+
 // import AnimatedSVG from '@/components/AnimatedSVG'
 
 const Navbar = () => {
@@ -166,6 +168,13 @@ const Navbar = () => {
               </li>
             ))}
           </ul>
+          {/* Botón de Google Sign In en la navbar */}
+          <button
+            onClick={() => signIn('google')}
+            className="bg-[#4285F4] text-white py-2 px-4 rounded-md hover:bg-[#357ae8]"
+          >
+            Sign in with Google
+          </button>
         </motion.nav>
       </div>
     </>
