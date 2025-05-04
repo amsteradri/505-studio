@@ -43,8 +43,8 @@ const Who = () => {
       <div className="max-w-6xl mx-auto text-center">
         <motion.h2
           initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
           className="text-5xl md:text-6xl font-bold tracking-tight mb-20"
         >
           {t('title')}
@@ -53,15 +53,12 @@ const Who = () => {
         <div className="grid md:grid-cols-2 gap-16">
           {team.map((member) => (
             <motion.div
-            key={member.name}
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.6, ease: 'easeOut' }}
-            className="bg-white border border-gray-200 rounded-2xl p-10 text-center transition-all duration-300"
-          >
-          
-            
+              key={member.name}
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.4 }}
+              className="bg-white border border-gray-200 rounded-2xl p-10 text-center"
+            >
               <img
                 src={member.image}
                 alt={member.name}
