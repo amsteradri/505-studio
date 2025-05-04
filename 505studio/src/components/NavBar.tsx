@@ -1,22 +1,25 @@
 'use client'
 
 import { useEffect, useState, useRef } from 'react'
-import { motion} from 'framer-motion'
+import { useRouter } from 'next/navigation'
+import { motion } from 'framer-motion'
 import { Menu, X } from 'lucide-react'
 import { useTranslations } from 'next-intl'
-import { signIn } from "next-auth/react"
-
-// import AnimatedSVG from '@/components/AnimatedSVG'
+import { useSession, signIn, signOut } from 'next-auth/react'
+import { FcGoogle } from 'react-icons/fc'
 
 const Navbar = () => {
   const t = useTranslations()
+  const router = useRouter()
+  const { data: session } = useSession()
 
   const navItems = [
     { id: 'hero', label: t('navbar.inicio') },
     { id: 'servicios', label: t('navbar.servicios') },
     { id: 'portafolio', label: t('navbar.portafolio') },
     { id: 'who', label: t('navbar.who') },
-    { id: 'contacto', label: t('navbar.contacto') }
+    { id: 'contacto', label: t('navbar.contacto') },
+    ...(session ? [{ id: 'dashboard', label: 'Dashboard', external: true }] : [])
   ]
 
   const [active, setActive] = useState('hero')
@@ -40,8 +43,9 @@ const Navbar = () => {
     const handleScroll = () => {
       let closestSection = navItems[0].id
       let closestOffset = Infinity
-      
+
       for (const item of navItems) {
+        if (item.external) continue
         const section = document.getElementById(item.id)
         if (section) {
           const offset = Math.abs(section.getBoundingClientRect().top)
@@ -51,23 +55,21 @@ const Navbar = () => {
           }
         }
       }
-  
+
       if (closestSection !== active) {
         setActive(closestSection)
         updateIndicator(closestSection)
       }
     }
-  
+
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
   }, [active])
-  
 
   useEffect(() => {
     updateIndicator(active)
     const resizeObserver = new ResizeObserver(() => updateIndicator(active))
     if (containerRef.current) resizeObserver.observe(containerRef.current)
-
     return () => resizeObserver.disconnect()
   }, [active])
 
@@ -85,7 +87,7 @@ const Navbar = () => {
 
   return (
     <>
-      {/* Mobile Hamburger Button y Logo */}
+      {/* Botón hamburguesa móvil y logo */}
       <div className="md:hidden fixed top-4 left-4 z-50 flex items-center gap-3">
         <button
           onClick={() => setMenuOpen(prev => !prev)}
@@ -97,19 +99,19 @@ const Navbar = () => {
         <motion.img
           src="/505 STUDIO-04.svg"
           alt="505 Studio Logo"
-          className="h-24 w-auto" // Aumentamos de h-10 a h-16 para hacerlo más grande
+          className="h-24 w-auto"
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5 }}
         />
       </div>
 
-      {/* Menú móvil desplegable */}
+      {/* Menú móvil */}
       <motion.div
         initial={{ opacity: 0, y: -20 }}
-        animate={{ 
+        animate={{
           opacity: menuOpen ? 1 : 0,
-          y: menuOpen ? 0 : -20 
+          y: menuOpen ? 0 : -20
         }}
         className={`${
           menuOpen ? 'flex' : 'hidden'
@@ -118,9 +120,17 @@ const Navbar = () => {
         {navItems.map(item => (
           <button
             key={item.id}
-            onClick={() => scrollToSection(item.id)}
+            onClick={() => {
+              if (item.external) {
+                router.push(`/${item.id}`)
+              } else {
+                scrollToSection(item.id)
+              }
+            }}
             className={`text-left px-4 py-2 rounded-md transition-colors duration-300 ${
-              active === item.id ? 'text-[#C0C0C0] bg-[#313131]' : 'text-[#F5F5F5] hover:bg-[#313131] hover:text-[#BDBDBD]'
+              active === item.id
+                ? 'text-[#C0C0C0] bg-[#313131]'
+                : 'text-[#F5F5F5] hover:bg-[#313131] hover:text-[#BDBDBD]'
             }`}
           >
             {item.label}
@@ -128,7 +138,7 @@ const Navbar = () => {
         ))}
       </motion.div>
 
-      {/* Desktop Navbar */}
+      {/* Navbar de escritorio */}
       <div className="fixed top-0 left-0 right-0 z-40 flex justify-center">
         <motion.nav
           initial={{ y: -60 }}
@@ -136,7 +146,6 @@ const Navbar = () => {
           transition={{ duration: 0.6 }}
           className="hidden md:flex mt-4 items-center gap-4 w-fit bg-[#212121]/90 backdrop-blur-md border border-[#424242] rounded-full shadow-lg py-3 relative"
         >
-          {/* Logo en la navbar */}
           <motion.img
             src="/505 STUDIO-04.svg"
             alt="505 Studio Logo"
@@ -154,12 +163,17 @@ const Navbar = () => {
               animate={{ left: indicatorStyle.left, width: indicatorStyle.width }}
               transition={{ type: 'spring', stiffness: 400, damping: 30 }}
             />
-            {/* Resto de items */}
             {navItems.map(item => (
               <li
                 key={item.id}
                 data-id={item.id}
-                onClick={() => scrollToSection(item.id)}
+                onClick={() => {
+                  if (item.external) {
+                    router.push(`/${item.id}`)
+                  } else {
+                    scrollToSection(item.id)
+                  }
+                }}
                 className={`cursor-pointer px-1 py-0.5 transition-colors duration-300 ${
                   active === item.id ? 'text-[#C0C0C0]' : 'hover:text-[#BDBDBD]'
                 }`}
@@ -167,14 +181,25 @@ const Navbar = () => {
                 {item.label}
               </li>
             ))}
+            <li>
+              {session ? (
+                <button
+                  onClick={() => signOut()}
+                  className="bg-[#212121] text-[#F5F5F5] py-1.5 px-3 rounded-md border border-[#424242] shadow-md hover:bg-[#313131] hover:text-[#C0C0C0] transition-colors duration-300 text-sm"
+                >
+                  Cerrar sesión
+                </button>
+              ) : (
+                <button
+                  onClick={() => signIn('google')}
+                  className="flex items-center gap-2 bg-[#212121] text-[#F5F5F5] py-1.5 px-3 rounded-md border border-[#424242] shadow-md hover:bg-[#313131] hover:text-[#C0C0C0] transition-colors duration-300 text-sm"
+                >
+                  <FcGoogle size={16} />
+                  <span>Iniciar sesión</span>
+                </button>
+              )}
+            </li>
           </ul>
-          {/* Botón de Google Sign In en la navbar */}
-          <button
-            onClick={() => signIn('google')}
-            className="bg-[#4285F4] text-white py-2 px-4 rounded-md hover:bg-[#357ae8]"
-          >
-            Sign in with Google
-          </button>
         </motion.nav>
       </div>
     </>
