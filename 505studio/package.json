@@ -10,6 +10,7 @@
     "postbuild": "next-sitemap"
   },
   "dependencies": {
+    "@auth/supabase-adapter": "^1.9.0",
     "@material-tailwind/react": "^2.1.10",
     "@react-spring/web": "^9.7.5",
     "@supabase/supabase-js": "^2.49.4",

@@ -1,9 +1,12 @@
-import NextAuth from "next-auth"
-import GoogleProvider from "next-auth/providers/google"
+import NextAuth from "next-auth";
+import GoogleProvider from "next-auth/providers/google";
+import { SupabaseAdapter } from "@auth/supabase-adapter";
+import { createClient } from "@supabase/supabase-js";
 
-if (!process.env.GOOGLE_CLIENT_ID || !process.env.GOOGLE_CLIENT_SECRET) {
-  throw new Error("Missing Google OAuth environment variables");
-}
+const supabase = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  process.env.SUPABASE_SERVICE_ROLE_KEY!  // usa la Service Role Key aquí
+);
 
 export const authOptions = {
   providers: [
@@ -12,12 +15,14 @@ export const authOptions = {
       clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
     }),
   ],
-  pages: {
-    signIn: '/auth/signin', // Optional: Customize the login page
-  },
+  adapter: SupabaseAdapter(supabase),
   secret: process.env.NEXTAUTH_SECRET,
-}
+  pages: {
+    signIn: "/auth/signin",
+  },
+  session: {
+    strategy: "database", // Guardar sesión en la DB
+  },
+};
 
-
-
-export default NextAuth(authOptions)
+export default NextAuth(authOptions);
